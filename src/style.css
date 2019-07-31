@@ -1,0 +1,38 @@
+.grid td {
+    width: 19px;
+    height: 22px;
+    font-size: 0.9em;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-align: center;
+    border-radius: 3px;
+    transition-property: all;
+    transition-duration: 100ms;
+    border: 1px solid #ededed;
+}
+
+table {
+    margin: 0 auto;
+}
+
+.grid td.hidden {
+    background-color: bisque;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+
+.grid td.bomb {
+    background: url(https://cdn.imgbin.com/12/10/9/imgbin-minesweeper-pro-classic-mine-sweeper-minesweeper-plus-likeminesweeper-bomb-zMHypRPh43qNLA8sm63wt419s.jpg);
+    background-size: contain;
+}
+
+.grid td.warn {
+    background-color: red;
+}
+
+.setup-container {
+    text-align: center;
+}
+.setup-container input {
+    padding: 10px;
+    margin: 5px;
+}
