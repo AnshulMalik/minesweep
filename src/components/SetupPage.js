@@ -25,6 +25,7 @@ class SetupPage extends Component {
           <input type="number" placeholder="Width" onChange={this.onWidthChange}></input>
           <input type="number" placeholder="Height" onChange={this.onHeightChange}></input>
           <input type="number" placeholder="Number of bombs" onChange={this.onBombsCountChange}></input>
+          <div className="reset" onClick={this.props.onReset}></div>
       </div>
     );
   }

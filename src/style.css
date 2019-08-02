@@ -36,3 +36,15 @@ table {
     padding: 10px;
     margin: 5px;
 }
+
+.reset {
+    width: 35px;
+    height: 35px;
+    display: inline-block;
+    position: relative;
+    top: 13px;
+    left: 10px;
+    cursor: pointer;
+    background: url(https://cdn2.iconfinder.com/data/icons/ikooni-generic-symbols/128/maybe-20-512.png);
+    background-size: cover;
+}

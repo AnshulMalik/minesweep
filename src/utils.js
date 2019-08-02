@@ -6,7 +6,6 @@ export function generateBombLocations(grid, bombCount) {
   if (!grid.width || !grid.height) {
       return;
   }
-
   const locations = [];
   const { width, height } = grid;
   while(bombCount > 0) {

@@ -7,10 +7,12 @@ class Container extends Component {
   constructor() {
     super();
     this.state = { open: {}, gameOver: false };
+
     this.renderRow = this.renderRow.bind(this);
     this.onGridClick = this.onGridClick.bind(this);
     this.onGridRightClick = this.onGridRightClick.bind(this);
     this.getClassNameForCol = this.getClassNameForCol.bind(this);
+    this.getTextForCol = this.getTextForCol.bind(this);
     this.initOpenState = this.initOpenState.bind(this);
   }
 
@@ -37,12 +39,13 @@ class Container extends Component {
       });
     }
 
-    this.setState({ open, bombSites, gridNumbers, warnedSites });
+    this.setState({ open, bombSites, gridNumbers, warnedSites, gameOver: false });
   }
 
   onGridClick(x, y) {
     const { open, bombSites, warnedSites, gameOver, gridNumbers } = this.state;
-    const { bombs, grid: { width, height } } = this.props;
+    const { grid: { width, height } } = this.props;
+
     if (warnedSites[x][y ] || gameOver) {
       // do not allow clicking on flagged squares
       return;
@@ -92,16 +95,21 @@ class Container extends Component {
       return "warn";
     }
     return open[x][y] ? bombSites[x][y] ? "bomb" : "" : "hidden";
-    // return bombSites[x][y] ? "bomb" : "";
+  }
+  getTextForCol(x, y) {
+    const { open, bombSites, gridNumbers } = this.state;
+    if (open[x][y] && !bombSites[x][y] && gridNumbers[x][y]) {
+      return gridNumbers[x][y];
+    }
+
+    return "";
   }
   renderRow(y) {
-    const { open, bombSites, gridNumbers } = this.state;
     const { grid: { width } } = this.props;
     const cols = [];
     for(let x = 0; x < width; x++) {
       const className = this.getClassNameForCol(x, y);
-      const text = open[x][y] && !bombSites[x][y] ? gridNumbers[x][y] : "";
-      // const text = !bombSites[x][y] ? gridNumbers[x][y] : "";
+      const text = this.getTextForCol(x, y);
       cols.push(<td className={className}
         key={`${x}-${y}`}
         onClick={() => this.onGridClick(x, y)}
@@ -112,7 +120,7 @@ class Container extends Component {
     return cols;
   }
   render() {
-    const { width, height } = this.props.grid;
+    const { height } = this.props.grid;
     let rows = [...Array(height)]
     rows = rows.map((_, i) => <tr key={i}>{this.renderRow(i)}</tr>);
     return (
